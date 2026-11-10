@@ -2,11 +2,15 @@ package com.hokla;
 
 public class Drug {
 
-    public String name;
+    private final String name;
 
-    public int useBefore;
+    private int useBefore;
 
-    public int efficiency;
+    private int efficiency;
+
+    public String getName() {
+        return name;
+    }
 
     public int getUseBefore() {
         return useBefore;
@@ -24,6 +28,14 @@ public class Drug {
 
     public static Drug create(String name, int useBefore, int efficiency) {
         return new Drug(name, useBefore, efficiency);
+    }
+
+    public void decreaseUseBefore() {
+        this.useBefore = useBefore - 1;
+    }
+
+    public void updateEfficiency(int efficiencyIncrement) {
+            this.efficiency = efficiency + efficiencyIncrement;
     }
 
     @Override
