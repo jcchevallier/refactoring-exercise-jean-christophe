@@ -1,7 +1,6 @@
 package com.hokla;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -30,10 +29,8 @@ class HoklaTest {
   void shouldDecreaseUseBeforeOf1ForAnyDrugsExceptGrannyRecipe(String name, int useBefore, int efficiency,
                                              int expectedUseBefore) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getUseBefore()).isEqualTo(expectedUseBefore);
+    assertThat(underTest.getDrugs().getFirst().getUseBefore()).isEqualTo(expectedUseBefore);
   }
 
   @ParameterizedTest
@@ -47,10 +44,8 @@ class HoklaTest {
                                                                             int efficiency,
                                                                             int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -64,10 +59,8 @@ class HoklaTest {
                                                                             int efficiency,
                                                                             int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -80,10 +73,8 @@ class HoklaTest {
   void shouldDecreaseEfficiencyOf1PercentForInsulinVialOver30DaysBeforePeremptionDate(String name, int useBefore, int efficiency,
                                                                                       int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -97,10 +88,8 @@ class HoklaTest {
                                                                                           int efficiency,
                                                                                       int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -114,10 +103,8 @@ class HoklaTest {
                                                                                           int efficiency,
                                                                                           int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -130,10 +117,8 @@ class HoklaTest {
   void shouldNullifyEfficiencyForInsulinVialWhenPeremptionDateReached(String name, int useBefore,
                                                                        int efficiency, int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -146,11 +131,9 @@ class HoklaTest {
   void shouldNotUpdateEfficiencyAndUseBeforeForGrannyRecipe(String name, int useBefore, int expectedUseBefore,
                                                int efficiency, int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
-    assertThat(underTest.getDrugs().get(0).getUseBefore()).isEqualTo(expectedUseBefore);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getUseBefore()).isEqualTo(expectedUseBefore);
   }
 
   @ParameterizedTest
@@ -163,10 +146,8 @@ class HoklaTest {
   void shouldIncreaseEfficiencyBy1ForOldBottleOfWineIfEfficiencyLesserThan100(String name, int useBefore,
                                                             int efficiency,int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
   @ParameterizedTest
@@ -179,49 +160,55 @@ class HoklaTest {
   void shouldNotUpdateEfficiencyForOldBottleOfWineIfEfficiencyGreaterThan100(String name, int useBefore,
                                                                              int efficiency,int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
     underTest.updateEfficiency();
-
-    assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+    assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
   }
 
-  /*
   @Nested
   class ArnVaccin {
 
-    @Disabled
     @ParameterizedTest
-    @CsvSource({"ARN Vaccin A,2,20,1",
-            "ARN Vaccin B,26,28,25",
-            "ARN Vaccin C,35,50,34",
-            "ARN Vaccin D,12,120,11",
-            "ARN Vaccin E,5,50,4"})
+    @CsvSource({"ARN Vaccin,2,20,1",
+            "ARN Vaccin,26,28,25",
+            "ARN Vaccin,35,50,34",
+            "ARN Vaccin,12,120,11",
+            "ARN Vaccin,5,50,4"})
     void shouldDecreaseUseBeforeOf1ForArnVaccin(String name, int useBefore, int efficiency,
                                                                  int expectedUseBefore) {
       underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
       underTest.updateEfficiency();
-
-      assertThat(underTest.getDrugs().get(0).getUseBefore()).isEqualTo(expectedUseBefore);
+      assertThat(underTest.getDrugs().getFirst().getUseBefore()).isEqualTo(expectedUseBefore);
     }
 
-    @Disabled
     @ParameterizedTest
-    @CsvSource({"Normal Drug A,2,20,18",
-            "Normal Drug B,26,28,26",
-            "Normal Drug C,35,50,48",
-            "Normal Drug D,22,7,5",
-            "Normal Drug E,12,120,118",
-            "Normal Drug F,5,50,48"})
+    @CsvSource({"ARN Vaccin,2,20,18",
+            "ARN Vaccin,26,28,26",
+            "ARN Vaccin,35,50,48",
+            "ARN Vaccin,22,7,5",
+            "ARN Vaccin,12,120,118",
+            "ARN Vaccin,5,50,48"})
     void shouldDecreaseEfficiencyOf2PercentBeforePeremptionDateForArnVaccin(String name, int useBefore,
                                                                               int efficiency,
                                                                               int expectedEfficiency) {
       underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
-
       underTest.updateEfficiency();
-
-      assertThat(underTest.getDrugs().get(0).getEfficiency()).isEqualTo(expectedEfficiency);
+      assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
     }
+
+    @ParameterizedTest
+    @CsvSource({"ARN Vaccin,-1,20,16",
+            "ARN Vaccin,-8,28,24",
+            "ARN Vaccin,-4,50,46",
+            "ARN Vaccin,-10,7,3",
+            "ARN Vaccin,-21,120,116",
+            "ARN Vaccin,-2,50,46"})
+    void shouldDecreaseEfficiencyOf4PercentWhenPeremptionDateReachedForArnVaccin(String name, int useBefore,
+                                                                                   int efficiency,
+                                                                                   int expectedEfficiency) {
+      underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
+      underTest.updateEfficiency();
+      assertThat(underTest.getDrugs().getFirst().getEfficiency()).isEqualTo(expectedEfficiency);
+    }
+
   }
-  */
 }

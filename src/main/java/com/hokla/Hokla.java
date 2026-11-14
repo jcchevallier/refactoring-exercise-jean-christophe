@@ -16,6 +16,7 @@ class Inventory {
     public void updateEfficiency() {
         this.drugs.forEach(drug -> {
             updateEfficiencyWithoutConsideringUseBefore(drug);
+            // Relevant only if useBefore < 0
             updateEfficiencyConsideringUseBefore(drug);
             decreaseUseBefore(drug);
         });
@@ -27,6 +28,11 @@ class Inventory {
             if(drug.getEfficiency() < 100) drug.updateEfficiency(1);
             return ;
         }
+        if (drug.getEfficiency() > 0 && isARNVaccin(drug)) {
+            drug.updateEfficiency(-2);
+            return ;
+        }
+
         if (drug.getEfficiency() > 0 && !isInsulin(drug))
             drug.updateEfficiency(-1);
 
@@ -50,13 +56,16 @@ class Inventory {
             drug.updateEfficiency(-drug.getEfficiency());
             return ;
         }
+        if (isARNVaccin(drug)) {
+            drug.updateEfficiency(-2);
+            return ;
+        }
         if (drug.getEfficiency() > 0 && !isGrannyRecipe(drug))
             drug.updateEfficiency(-1);
     }
 
     private void decreaseUseBefore(Drug drug) {
         if (!isGrannyRecipe(drug)) drug.decreaseUseBefore();
-
     }
 
     private boolean isInsulin(Drug drug) {
@@ -70,4 +79,9 @@ class Inventory {
     private boolean isGrannyRecipe(Drug drug) {
         return drug.getName().equals("Granny recipe");
     }
+
+    private boolean isARNVaccin(Drug drug) {
+        return drug.getName().equals("ARN Vaccin");
+    }
+
 }
