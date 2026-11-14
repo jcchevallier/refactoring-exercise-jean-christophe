@@ -170,7 +170,7 @@ class HoklaTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"Old bottle of wine, 2147483647,20,21",
+  @CsvSource({"Old bottle of wine, 2147483647,100,100",
           "Old bottle of wine,101,128,128",
           "Old bottle of wine,150,150,150",
           "Old bottle of wine,200,117,117",
