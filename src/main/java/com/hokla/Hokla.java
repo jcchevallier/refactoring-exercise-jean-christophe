@@ -81,7 +81,7 @@ class Inventory {
     }
 
     private boolean isARNVaccin(Drug drug) {
-        return drug.getName().equals("ARN Vaccin");
+        return drug.getName().equals("mRNA Vaccines");
     }
 
 }

@@ -168,11 +168,11 @@ class HoklaTest {
   class ArnVaccin {
 
     @ParameterizedTest
-    @CsvSource({"ARN Vaccin,2,20,1",
-            "ARN Vaccin,26,28,25",
-            "ARN Vaccin,35,50,34",
-            "ARN Vaccin,12,120,11",
-            "ARN Vaccin,5,50,4"})
+    @CsvSource({"mRNA Vaccines,2,20,1",
+            "mRNA Vaccines,26,28,25",
+            "mRNA Vaccines,35,50,34",
+            "mRNA Vaccines,12,120,11",
+            "mRNA Vaccines,5,50,4"})
     void shouldDecreaseUseBeforeOf1ForArnVaccin(String name, int useBefore, int efficiency,
                                                                  int expectedUseBefore) {
       underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
@@ -181,12 +181,12 @@ class HoklaTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"ARN Vaccin,2,20,18",
-            "ARN Vaccin,26,28,26",
-            "ARN Vaccin,35,50,48",
-            "ARN Vaccin,22,7,5",
-            "ARN Vaccin,12,120,118",
-            "ARN Vaccin,5,50,48"})
+    @CsvSource({"mRNA Vaccines,2,20,18",
+            "mRNA Vaccines,26,28,26",
+            "mRNA Vaccines,35,50,48",
+            "mRNA Vaccines,22,7,5",
+            "mRNA Vaccines,12,120,118",
+            "mRNA Vaccines,5,50,48"})
     void shouldDecreaseEfficiencyOf2PercentBeforePeremptionDateForArnVaccin(String name, int useBefore,
                                                                               int efficiency,
                                                                               int expectedEfficiency) {
@@ -196,12 +196,12 @@ class HoklaTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"ARN Vaccin,-1,20,16",
-            "ARN Vaccin,-8,28,24",
-            "ARN Vaccin,-4,50,46",
-            "ARN Vaccin,-10,7,3",
-            "ARN Vaccin,-21,120,116",
-            "ARN Vaccin,-2,50,46"})
+    @CsvSource({"mRNA Vaccines,-1,20,16",
+            "mRNA Vaccines,-8,28,24",
+            "mRNA Vaccines,-4,50,46",
+            "mRNA Vaccines,-10,7,3",
+            "mRNA Vaccines,-21,120,116",
+            "mRNA Vaccines,-2,50,46"})
     void shouldDecreaseEfficiencyOf4PercentWhenPeremptionDateReachedForArnVaccin(String name, int useBefore,
                                                                                    int efficiency,
                                                                                    int expectedEfficiency) {
