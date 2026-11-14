@@ -22,7 +22,7 @@ class Inventory {
     }
 
     private void updateEfficiencyWithoutConsideringUseBefore(Drug drug) {
-        if (!drug.getName().equals("Old bottle of wine")) {
+        if (!isBottleOfWine(drug)) {
             if (drug.getEfficiency() > 0) {
                 if (!drug.getName().equals("Granny recipe")) {
                     if (isInsulin(drug)) {
@@ -51,7 +51,7 @@ class Inventory {
 
     private void updateEfficiencyConsideringUseBefore(Drug drug) {
         if (drug.getUseBefore() < 0) {
-            if (!drug.getName().equals("Old bottle of wine")) {
+            if (!isBottleOfWine(drug)) {
                 if (!isInsulin(drug)) {
                     if (drug.getEfficiency() > 0) {
                         if (!drug.getName().equals("Granny recipe")) {
@@ -77,5 +77,9 @@ class Inventory {
 
     private boolean isInsulin(Drug drug) {
         return drug.getName().equals("Insulin vial");
+    }
+
+    private boolean isBottleOfWine(Drug drug) {
+        return drug.getName().equals("Old bottle of wine");
     }
 }
