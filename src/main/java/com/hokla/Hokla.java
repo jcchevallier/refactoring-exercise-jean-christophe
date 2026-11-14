@@ -14,7 +14,6 @@ class Inventory {
     }
 
     public void updateEfficiency() {
-       // for (int i = 0; i < drugs.size(); i++) {
         this.drugs.forEach(drug -> {
             updateEfficiencyWithoutConsideringUseBefore(drug);
             updateEfficiencyConsideringUseBefore(drug);
@@ -26,7 +25,7 @@ class Inventory {
         if (!drug.getName().equals("Old bottle of wine")) {
             if (drug.getEfficiency() > 0) {
                 if (!drug.getName().equals("Granny recipe")) {
-                    if (drug.getName().equals("Insulin vial")) {
+                    if (isInsulin(drug)) {
                         drug.updateEfficiency(-1);
                         if (drug.getUseBefore() < 31) {
                             if (drug.getEfficiency() > 0) {
@@ -53,7 +52,7 @@ class Inventory {
     private void updateEfficiencyConsideringUseBefore(Drug drug) {
         if (drug.getUseBefore() < 0) {
             if (!drug.getName().equals("Old bottle of wine")) {
-                if (!drug.getName().equals("Insulin vial")) {
+                if (!isInsulin(drug)) {
                     if (drug.getEfficiency() > 0) {
                         if (!drug.getName().equals("Granny recipe")) {
                             drug.updateEfficiency(-1);
@@ -74,5 +73,9 @@ class Inventory {
         if (!drug.getName().equals("Granny recipe")) {
             drug.decreaseUseBefore();
         }
+    }
+
+    private boolean isInsulin(Drug drug) {
+        return drug.getName().equals("Insulin vial");
     }
 }
