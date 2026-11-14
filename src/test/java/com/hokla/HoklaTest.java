@@ -54,12 +54,12 @@ class HoklaTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"Normal Drug A,0,20,18",
-          "Normal Drug B,0,28,26",
-          "Normal Drug C,0,50,48",
-          "Normal Drug D,0,7,5",
-          "Normal Drug E,0,120,118",
-          "Normal Drug F,0,50,48"})
+  @CsvSource({"Normal Drug A,-1,20,18",
+          "Normal Drug B,-1,28,26",
+          "Normal Drug C,-1,50,48",
+          "Normal Drug D,-1,7,5",
+          "Normal Drug E,-1,120,118",
+          "Normal Drug F,-1,50,48"})
   void shouldDecreaseEfficiencyOf2PercentWhenPeremptionDateReachedForNormalDrugs(String name, int useBefore,
                                                                             int efficiency,
                                                                             int expectedEfficiency) {
@@ -121,12 +121,12 @@ class HoklaTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"Insulin vial,0,20,0",
-          "Insulin vial,0,28,0",
-          "Insulin vial,0,50,0",
-          "Insulin vial,0,7,0",
-          "Insulin vial,0,120,0",
-          "Insulin vial,0,50,0"})
+  @CsvSource({"Insulin vial,-1,20,0",
+          "Insulin vial,-1,28,0",
+          "Insulin vial,-1,50,0",
+          "Insulin vial,-1,7,0",
+          "Insulin vial,-1,120,0",
+          "Insulin vial,-1,50,0"})
   void shouldNullifyEfficiencyForInsulinVialWhenPeremptionDateReached(String name, int useBefore,
                                                                        int efficiency, int expectedEfficiency) {
     underTest.getDrugs().add(new Drug(name, useBefore, efficiency));
