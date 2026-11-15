@@ -38,9 +38,9 @@ class Inventory {
 
         if (drug.getEfficiency() > 0 && isInsulin(drug)) {
                 drug.updateEfficiency(-1);
-                if (drug.getUseBefore() < 31 && drug.getEfficiency() > 0)
+                if (drug.getUseBefore() < 31)
                         drug.updateEfficiency(-1);
-                if (drug.getUseBefore() < 8 && drug.getEfficiency() > 0)
+                if (drug.getUseBefore() < 8)
                         drug.updateEfficiency(-1);
 
         }
